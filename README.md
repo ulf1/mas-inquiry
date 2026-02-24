@@ -17,7 +17,7 @@ uv sync
 export GEMINI_API_KEY="your-api-key"
 ```
 
-or write in in `.env` file.
+or write it in an `.env` file.
 
 
 ## Unit Tests
@@ -37,7 +37,7 @@ python -m src.cli --query "Research the current state of AI agents"
 
 
 ## Preparation
-This system was mainly designed with the help of AI tools, and funnily enough, it is about designing an multi-agent system to do AI stuff.
+This system was mainly designed with the help of AI tools, and funnily enough, it is about designing a multi-agent system to do AI stuff.
 
 #### Step 1: Product research
 Ask chat-based AI tools the following questions:
@@ -45,7 +45,7 @@ Ask chat-based AI tools the following questions:
 - "Assume a string of text as input, what are possible ways to process it to an output? The system is then looking for what, why, ..."
 - ... and so forth ...
 
-The result are the three tables in the section "Question Workers". 
+The results are the three tables in the section "Question Workers".
 
 #### Step 2: System design
 Some system design decisions, e.g. LangGraph with Gemini LLM API calls, input via CLI.
@@ -58,7 +58,7 @@ In the next step, the copilot instructions markdowns were transformed into Antig
 I already had copilot instructions for specific languages and frameworks (e.g. Python, LangGraph, FastAPI), 
 and tasks (e.g. Code Review, AI agent design properties, specific multi-agent patterns).
 
-You literal prompt the Antigravity AI assistent:
+You literally prompt the Antigravity AI assistant:
 - "Refactor the copilot instructions into Antigravity Skills"
 - "Check if files have redundant information and remove it"
 - "Propose missing best practices"
@@ -72,27 +72,27 @@ Given my idea about the system architecture, it took me two evenings to refine j
 Otherwise the Coding Agent would just flip coins, and branch into wanted or unwanted directions. 
 
 #### Step 4: AI Coding on Autopilot
-The [the-initial-prompt.md](the-initial-prompt.md) is what was Copy-Pasted into the Antigravity AI assistent.
-With hindsight, the initial prompt looks messy and chaotic; i wrote it find it hard to understand now ...
-It me around 3 hours to write this (immature) intial prompt (draft).
+The [the-initial-prompt.md](the-initial-prompt.md) is what was copy-pasted into the Antigravity AI assistant.
+With hindsight, the initial prompt looks messy and chaotic; I wrote it but find it hard to understand now...
+It took me around 3 hours to write this (immature) initial prompt (draft).
 Finally, it took Antigravity a few minutes to generate a working prototype on autopilot.
 And the thing actually worked as intended. 
 
 Honestly, I could have just stopped there. Skim over it, and ship it.
 
 #### Step 5: Manual Coding
-I was curious how long it would take to refactor the system without AI assistent just to understand what the AI assistent coded.
+I was curious how long it would take to refactor the system without an AI assistant just to understand what the AI assistant coded.
 It took me around 3 evenings. 
 My refactored version is posted in this repo. 
-It's basically double-checking the ai-generated solution but I didn't really found any major issues that would have prevented the system from working as specified.
+It's basically double-checking the AI-generated solution but I didn't really find any major issues that would have prevented the system from working as specified.
 
 #### Conclusion:
 - **Product research** can happen with Chat-AI-tools, e.g. Deep Research modes.
-- **Specification** doesn't happen in Kanban boards anymore - it happens in Markdown files (Is Kanban dead? Is SCRUM a relict from the past?)
-- Spend time on refining general **Instructions** for the AI assistent, e.g. prompt to remove ambiguities and contradictions.
-- Spend and the large **initial prompt** - if it's about math on a computer, then prompt at least pseudocode and algorithmic descriptions as you would actually want to code it.
-- If the initial code generation prompt fails, then don't fix the code, **fix the instructions and initial promp, and start over again**. We human don't code anything anymore in the AI assistent world! (see step 4)
-- If something really really needs security checks, is mission critical, or else, then good programming skills might be necessary for **Debugging**, **Reverse Engineering**, or **Security Analysis** (see step 5). However, is every software so important? 
+- **Specification** doesn't happen in Kanban boards anymore - it happens in Markdown files (Is Kanban dead? Is Scrum a relic of the past? Why writing git issues if we can fix it immediately?)
+- Spend time on refining general **Instructions** for the AI assistant, e.g. prompt to remove ambiguities and contradictions.
+- Spend time on the large **initial prompt** - if it's about math on a computer, then prompt at least pseudocode and algorithmic descriptions as you would actually want to code it.
+- If the initial code generation prompt fails, then don't fix the code, **fix the instructions and initial prompt, and start over again**. We humans don't code anything anymore in the AI assistant world! (see step 4)
+- If something really needs security checks, is mission critical, or otherwise, then good programming skills might be necessary for **Debugging**, **Reverse Engineering**, or **Security Analysis** (see step 5). However, is all software so important? 
 
 Before coding agents, software development was so expensive and way undersupplied, that humanity probably doesn't know the actual demand for software.
 
@@ -116,7 +116,7 @@ While writing the initial prompt, I wondered if all the biology analogies and ne
 
 
 ### Question Workers
-I think linguistic call this stuff "concepts" (but maybe i'm wrong). Each Questions Worker focus on searching for the what, who, when, where, why, how of a topic. In grammar and morphology (linguistic) we have PoS (Part of Speech) tags, and NER (Named Entity Recognition) tags, and so forth for that. However, here it's more about jeopardy. A human might prompt the input string"Correct push-ups?" what doesn't provide the answer almost nothing. For example, the Questions Workers "Causal" (Why?) search for "Why?" information related to the input string. 
+I think linguists call this stuff "concepts" (but maybe I'm wrong). Each Question Worker focuses on searching for the what, who, when, where, why, and how of a given string. In grammar and morphology (linguistics) we have PoS (Part of Speech) tags, and NER (Named Entity Recognition) tags, and so forth for that. However, here it's more about jeopardy. A human might prompt the input string "Correct push-ups?" which provides almost nothing. For example, the Question Worker "Causal" (Why?) searches for "Why?" information related to the input string. 
 
 
 The **base** questions types:
@@ -160,13 +160,13 @@ The **hidden** dimension questions:
 
 
 ### The InquiryOther Worker
-When a Question Worker is tasked to generate answers, the worker is supposed to associate the answer with on the given questions types (or topics, or concepts), so that the answer is passed to the next Question Worker in the graph. During the test runs, the Question Worker sometimes produced new question types. These made sense on visual inspection, but I didn't add them to the base question types. Instead, the `InquiryOther` Question Worker was added, what is like a residual term in a linear regression model, a catch all node - it makes a input layer or hidden layer MECE (mutually exclusive, collectively exhaustive).
+When a Question Worker is tasked to generate answers, the worker is supposed to associate each answer with one of the given question types (or topics, or concepts), so that the answer is passed to the next Question Worker in the graph. During the test runs, the Question Workers sometimes produced new question types. These made sense on visual inspection, but I didn't add them to the base question types. Instead, the `InquiryOther` Question Worker was added, which is like a residual term in a linear regression model, a catch-all node - it makes an input layer or hidden layer MECE (mutually exclusive, collectively exhaustive).
 
 
 ### Merge Worker
 The Prompt in `inquiry_base.py` and `inquiry_reply_merger.py` are very similar.
 The `MERGER_PROMPT` is more about reducing the number of answers to given maximum number of answers (and usually the number of connections to other Question Workers).
-The `BASE_PROMPT_TEMPLATE` is more about about near duplicate detection and merging of answers.
+The `BASE_PROMPT_TEMPLATE` is more about near duplicate detection and merging of answers.
 The prompted algorithm is the same: It's a classic optimization goal to maximize the sum of relevance scores while minimizing the similarity between answers.
 
 => Any agent without **goal** is not really an agent. (It's just a function)
