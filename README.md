@@ -84,7 +84,7 @@ Honestly, I could have just stopped there. Skim over it, and ship it.
 I was curious how long it would take to refactor the system without an AI assistant just to understand what the AI assistant coded.
 It took me around 3 evenings. 
 My refactored version is posted in this repo. 
-It's basically double-checking the AI-generated solution but I didn't really find any major issues that would have prevented the system from working as specified.
+It's basically double-checking the AI-generated solution but I didn't really find any major issues that would have prevented the system from working (There was just one bug).
 
 #### Conclusion:
 - **Product research** can happen with Chat-AI-tools, e.g. Deep Research modes.

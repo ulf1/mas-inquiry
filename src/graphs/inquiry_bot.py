@@ -163,7 +163,7 @@ def cross_nodes(state: AgentState):
         # metric check to save or deactivate
         prev_metric = calculate_worker_metric(previous[dim])
         new_metric = calculate_worker_metric(merged_reply)
-        if new_metric <= prev_metric:
+        if new_metric > prev_metric:
             return dim, merged_reply, None
         else:
             return dim, answer, dim
