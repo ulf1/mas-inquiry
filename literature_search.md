@@ -1,5 +1,6 @@
 ---
 Prompt: analyse the algorithm coded in src/ and in the README.md; search for literature or research paper that implemented this algorithm before, or find research ideas with a high similarity. Also look for a AI research paper since 70s up today. save your findings in literature_search.md
+LLM: used Claude Opus 4.6 (Thinking)
 Warning: I have not checked any of the sources yet. Could be all fake.
 ---
 
