@@ -28,7 +28,7 @@ The system is orchestrated using `langgraph` as a state machine (`StateGraph`).
     - This conditionally loops if `loop_count < 2`.
 3. **Output Layer (`summarizer`)**: All consolidated `worker_replies` are given to a single `InquirySummary` node, which relies on a separate LLM prompt to digest the answers and summarize the final output.
 
-The main orchestration logic is defined in [inquiry_bot.py](file:///home/ulf/repos/antigravity/mas-ghost3/src/graphs/inquiry_bot.py).
+The main orchestration logic is defined in [inquiry_bot.py](src/graphs/inquiry_bot.py).
 
 ## 2. Worker Mechanics
 
@@ -115,7 +115,7 @@ Return (answers_list, similarity_scores, connections_list)
 When extending or inspecting the `inquiry_bot` module, adhere to the architectural expectations: 
 - Understand that the state transitions of the inner nodes (Input to Hidden Layer to Hidden Layer) actively evaluate the custom geometric heuristic defined in `calculate_worker_metric` before persisting node output.
 - Structural algorithms are natively embedded in the prompt context of `BASE_PROMPT_TEMPLATE` and `MERGER_PROMPT`. Modifying deduplication constraints or similarity thresholds directly modifies cognitive depth and network connectivity sparsity.
-- A global metric for the entire inquiry set is calculated by `InquirySupervisor.calculate_metric` in [inquiry_supervisor.py](file:///home/ulf/repos/antigravity/mas-ghost3/src/agents/supervisors/inquiry_supervisor.py).
+- A global metric for the entire inquiry set is calculated by `InquirySupervisor.calculate_metric` in [inquiry_supervisor.py](src/agents/supervisors/inquiry_supervisor.py).
 
 
 ## Workers
