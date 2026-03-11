@@ -1,5 +1,4 @@
 import math
-from pydantic import BaseModel
 from src.agents.workers.inquiry_base import calculate_worker_metric, WorkerReply
 
 

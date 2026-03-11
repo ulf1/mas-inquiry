@@ -1,12 +1,9 @@
-import operator
 import importlib
 import os
 from typing import TypedDict, Annotated
 from concurrent.futures import ThreadPoolExecutor
 from src.agents.workers.inquiry_base import WorkerReply
 
-import time
-from typing import TypedDict, List
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.memory import InMemorySaver
 
@@ -25,14 +22,13 @@ from src.agents.workers.inquiry_summary import InquirySummary
 
 # import util for worker class
 def get_worker_class(dimension: str):
-    dim_snake = dimension.lower().replace(" ", "_").replace("'", "")
     dim_class = dimension.replace(" ", "").replace("'", "")
     try:
         module = importlib.import_module(f"src.agents.workers.inquiry_base")
         return getattr(module, f"Inquiry{dim_class}")
     except (ImportError, AttributeError):
         obj = InquiryOther()
-        obj.set_defintion(dimension)
+        obj.set_definition(dimension)
         return obj
 
 
