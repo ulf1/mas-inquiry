@@ -353,7 +353,7 @@ class InquiryTemporal(BaseInquiryWorker):
     )
 
 class InquiryTheVoid(BaseInquiryWorker):
-    name = "inquiry_the__void"
+    name = "inquiry_the_void"
     dimension = "The Void"
     primary_focus = "Omission"
     answer_types = ["absence", "silence", "blind spot", "gap"]

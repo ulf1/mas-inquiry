@@ -25,7 +25,7 @@ The system is orchestrated using `langgraph` as a state machine (`StateGraph`).
     - The target workers generate a new set of focused/refined answers.
     - An `InquiryReplyMerger` is then invoked to merge the newly generated context-aware answers with the previously recorded answers for that exact dimension.
     - A **worker metric** is calculated (evaluating relevance score versus similarity score). If the context-merged result does not improve the metric over the previous result, the worker is added to `deactivated_workers` and practically frozen.
-    - This conditionally loops if `loop_count < 2`.
+    - This conditionally loops while `loop_count < 2` (i.e., the hidden layer runs up to 2 iterations before proceeding to the output layer).
 3. **Output Layer (`summarizer`)**: All consolidated `worker_replies` are given to a single `InquirySummary` node, which relies on a separate LLM prompt to digest the answers and summarize the final output.
 
 The main orchestration logic is defined in [inquiry_bot.py](src/graphs/inquiry_bot.py).
@@ -41,7 +41,7 @@ Each worker agent inherits from `BaseInquiryWorker` and represents a specific gr
   - Answer Type
   - Relevance Score (0.0 to 1.0)
 - **Connections**: The worker specifies skip connections to other dimension graphs using a `connections_list`.
-- **Evaluation Metric (`calculate_worker_metric`)**: Reponses are evaluated via an algorithmic metric calculation:
+- **Evaluation Metric (`calculate_worker_metric`)**: Responses are evaluated via an algorithmic metric calculation:
   $Metric = \sqrt{\text{num\_answers}} + \text{average\_relevance} - \text{average\_similarity} + \text{average\_connections\_per\_answer}$
   This purposefully incentivizes workers to hunt for a high volume of relevant, highly distinct answers that richly interlink with other complementary dimensions. 
 
@@ -55,29 +55,30 @@ The LLM is explicitly instructed to execute rigid optimization algorithms direct
 
 For isolated worker exploration:
 ```text
-loops = 0
-answers_list = []
+0) answers_list = [], loops = 0
 
-While loops < max_fillups and len(answers_list) < max_answers:
-    1) Generate distinct answers most relevant to the target dimension focus. For each:
-       - Compute relevance score against the inquiry.
-       - Identify the answer type.
-       - Add to answers_list.
-       
-    2) Compute similarity scores between answers of the identical answer type.
-    
-    3) Find the pair of answers (X, Y) with the highest similarity score.
-       If similarity(X, Y) > threshold:
-           - Merge X and Y into a new structured answer Z.
-           - Compute a new relevance score for Z.
-           - If relevance(Z) > relevance(X) AND relevance(Z) > relevance(Y):
-               Remove X and Y from answers_list.
-               Add Z to answers_list.
-               Discard similarity score between X and Y.
-               
-    loops += 1
+1) Generate distinct answers most relevant to the target dimension focus (up to max_answers). For each:
+   - Compute relevance score against the inquiry.
+   - Identify the answer type.
+   - Add to answers_list.
 
-6) For each surviving answer, propose up to `max_connections` matching to other valid framework Dimensions.
+2) Compute similarity scores between answers of the identical answer type.
+
+3) For each answer type, find the pair (X, Y) with the highest similarity score.
+   If similarity(X, Y) > threshold:
+       - Merge X and Y into a new structured answer Z.
+       - Compute a new relevance score for Z.
+       - If relevance(Z) > relevance(X) AND relevance(Z) > relevance(Y):
+           Remove X and Y from answers_list.
+           Add Z to answers_list.
+           Discard similarity score between X and Y.
+
+4) loops += 1. If loops >= max_fillups, go to step 6.
+
+5) If len(answers_list) < max_answers, repeat from step 3.
+
+6) For each surviving answer, propose up to max_connections matching to other valid framework Dimensions.
+
 Return (answers_list, similarity_scores, connections_list)
 ```
 
@@ -86,26 +87,29 @@ Return (answers_list, similarity_scores, connections_list)
 When aggregating a merged reply across recursive graph layers, the system depends on the `InquiryReplyMerger` prompt instruction set to reliably squash the data format into defined length constraints:
 
 ```text
-loops = 0
-answers_list = concat(data1.answers_list, data2.answers_list)
-connections_list = concat(data1.connections_list, data2.connections_list)
+0) loops = 0
 
-While loops < max_removals and len(answers_list) > max_answers:
+1) answers_list = concat(data1.answers_list, data2.answers_list)
+   connections_list = concat(data1.connections_list, data2.connections_list)
 
-    2) Compute similarity scores between existing answers of identical answer types.
-    
-    3) Find the pair of answers (X, Y) with the highest similarity score.
-       If similarity(X, Y) > threshold:
-           - Merge X and Y into a new, encompassing answer Z.
-           - Compute relevance score for Z.
-           - If relevance(Z) > relevance(X) AND relevance(Z) > relevance(Y):
-               Remove X and Y from answers_list.
-               Add Z to answers_list.
-               Remove similarity score between X and Y.
-               Drop respective connections related to X and Y.
-               Add new contextual connection for Z.
-               
-    loops += 1
+2) Compute similarity scores between existing answers of identical answer types.
+
+3) For each answer type, find the pair (X, Y) with the highest similarity score.
+   If similarity(X, Y) > threshold:
+       - Merge X and Y into a new, encompassing answer Z.
+       - Compute relevance score for Z.
+       - If relevance(Z) > relevance(X) AND relevance(Z) > relevance(Y):
+           Remove X and Y from answers_list.
+           Add Z to answers_list.
+           Remove similarity score between X and Y.
+           Drop respective connections related to X and Y.
+           Add new contextual connection for Z.
+
+4) loops += 1. If loops >= max_removals, go to step 6.
+
+5) If len(answers_list) > max_answers, repeat from step 3.
+
+6) Stop.
 
 Return (answers_list, similarity_scores, connections_list)
 ```
@@ -115,7 +119,8 @@ Return (answers_list, similarity_scores, connections_list)
 When extending or inspecting the `inquiry_bot` module, adhere to the architectural expectations: 
 - Understand that the state transitions of the inner nodes (Input to Hidden Layer to Hidden Layer) actively evaluate the custom geometric heuristic defined in `calculate_worker_metric` before persisting node output.
 - Structural algorithms are natively embedded in the prompt context of `BASE_PROMPT_TEMPLATE` and `MERGER_PROMPT`. Modifying deduplication constraints or similarity thresholds directly modifies cognitive depth and network connectivity sparsity.
-- A global metric for the entire inquiry set is calculated by `InquirySupervisor.calculate_metric` in [inquiry_supervisor.py](src/agents/supervisors/inquiry_supervisor.py).
+- A global metric for the entire inquiry set is calculated by `InquirySupervisor.calculate_metric` in [inquiry_supervisor.py](src/agents/supervisors/inquiry_supervisor.py):
+  $SupervisorMetric = \sqrt{\text{num\_workers\_with\_answers}} + \sum{\text{worker\_metrics}}$
 
 
 ## Workers
