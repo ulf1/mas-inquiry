@@ -168,7 +168,7 @@ class InquiryOther(BaseInquiryWorker):
     )
 
     @classmethod
-    def set_defintion(cls, dimension: str) -> None:
+    def set_definition(cls, dimension: str) -> None:
         # keep dimension name as is
         cls.name = f"inquiry_{dimension.lower()}"
         cls.primary_focus = f"{dimension} dimension"
@@ -356,7 +356,7 @@ class InquiryTheVoid(BaseInquiryWorker):
     name = "inquiry_the__void"
     dimension = "The Void"
     primary_focus = "Omission"
-    answer_types = ["Absence", "silence", "blind spot", "gap"]
+    answer_types = ["absence", "silence", "blind spot", "gap"]
     contextual_utility = (
         "The Negative Space: Essential for forensics; looks for what should be there."
     )

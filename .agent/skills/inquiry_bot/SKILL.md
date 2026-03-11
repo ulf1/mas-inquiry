@@ -149,7 +149,7 @@ When extending or inspecting the `inquiry_bot` module, adhere to the architectur
 
 | **Question Type**   | **Dimension**     | **Primary Focus** | **Answer Types (Brackets)**              | **Contextual Utility (Short Description)**                                         |
 | ------------------- | ----------------- | ----------------- | ---------------------------------------- | ---------------------------------------------------------------------------------- |
-| **What's Missing?** | **The Void**      | Omission          | (Absence, silence, blind spot, gap)      | **The Negative Space:** Essential for forensics; looks for what _should_ be there. |
+| **What's Missing?** | **The Void**      | Omission          | (absence, silence, blind spot, gap)      | **The Negative Space:** Essential for forensics; looks for what _should_ be there. |
 | **Whose View?**     | **Perspective**   | Bias & Lens       | (Framing, subjectivity, cultural filter) | **The Lens:** Corrects for the observer effect and subjective distortion.          |
 | **What If?**        | **Hypothetical**  | Counterfactual    | (Simulation, alternative, prediction)    | **The Divergence:** Explores potential realities and stress-tests outcomes.        |
 | **Is it Right?**    | **Ethical**       | Moral Value       | (Equity, privacy, consent, integrity)    | **The Conscience:** Filters the inquiry through legal and moral constraints.       |

@@ -32,7 +32,7 @@ def get_worker_class(dimension: str):
         return getattr(module, f"Inquiry{dim_class}")
     except (ImportError, AttributeError):
         obj = InquiryOther()
-        obj.set_defintion(dimension)
+        obj.set_definition(dimension)
         return obj
 
 
