@@ -317,10 +317,10 @@ $$
 \begin{aligned}
 &\textbf{Algorithm 3: Graph Execution} \\
 &\text{Input: inquiry string } q \\[6pt]
-&1.\quad \texttt{init\_node}: \;\mathcal{W}_{\text{active}} \leftarrow \mathcal{D}, \; \mathcal{W}_{\text{dead}} \leftarrow \emptyset, \; t \leftarrow 0 \\
-&2.\quad \texttt{prelim\_nodes}: \;\text{For each } d \in \mathcal{W}_{\text{active}} \text{ (parallel):} \\
+&1.\quad \texttt{init\\_node}: \;\mathcal{W}_{\text{active}} \leftarrow \mathcal{D}, \; \mathcal{W}_{\text{dead}} \leftarrow \emptyset, \; t \leftarrow 0 \\
+&2.\quad \texttt{prelim\\_nodes}: \;\text{For each } d \in \mathcal{W}_{\text{active}} \text{ (parallel):} \\
 &\qquad R_d^{(0)} \leftarrow \text{Worker}_d(q) \quad \text{[Algorithm 1]} \\
-&3.\quad \texttt{cross\_nodes}: \\
+&3.\quad \texttt{cross\\_nodes}: \\
 &\qquad 3a.\quad \text{Collect connections: } \forall\, (i, d') \in \bigcup_d R_d^{(t)}.\text{connections}: \\
 &\qquad\qquad\quad \text{route answer } R_d^{(t)}.\mathbf{A}[i] \text{ to dimension } d' \text{ if } d' \notin \mathcal{W}_{\text{dead}} \\
 &\qquad 3b.\quad \text{For each target } d' \text{ (parallel):} \\
