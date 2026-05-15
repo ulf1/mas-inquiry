@@ -1,5 +1,9 @@
 # Multi-Agent System (MAS) with LangGraph
 
+Readings
+- [Documentation "A Multi-Agent System for Interrogative Decomposition of Human Inquiries Using LLM-Backed Sparse Dynamic Graphs"](docs/README.md)
+- [Literature review and research on related work](docs/02-literature-search.md)
+- [The initial prompt](docs/01-prompt-original.md)
 
 ## Setup
 
