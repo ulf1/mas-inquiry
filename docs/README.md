@@ -484,23 +484,23 @@ The system was generated from a single prompt using Google's Antigravity IDE age
 
 [1] LangGraph. "LangGraph: Build Stateful, Multi-Actor Applications with LLMs." https://github.com/langchain-ai/langgraph
 
-[2] Minto, B. (1987). *The Pyramid Principle: Logic in Writing and Thinking*. Minto International.
+[2] Minto, B. (1987). *The Pyramid Principle: Logic in Writing and Thinking*. Minto International. https://archive.org/details/pyramidprinciple0000mint
 
-[3] He, K., Zhang, X., Ren, S. & Sun, J. (2015). "Deep Residual Learning for Image Recognition." *arXiv:1512.03385*.
+[3] He, K., Zhang, X., Ren, S. & Sun, J. (2015). "Deep Residual Learning for Image Recognition." *arXiv:1512.03385*. https://doi.org/10.1109/CVPR.2016.90
 
-[4] Srivastava, N. et al. (2014). "Dropout: A Simple Way to Prevent Neural Networks from Overfitting." *Journal of Machine Learning Research*, 15, 1929–1958.
+[4] Srivastava, N. et al. (2014). "Dropout: A Simple Way to Prevent Neural Networks from Overfitting." *Journal of Machine Learning Research*, 15, 1929–1958. https://doi.org/10.5555/2627435.2670313
 
-[5] Huang, G. et al. (2016). "Deep Networks with Stochastic Depth." *European Conference on Computer Vision (ECCV)*.
+[5] Huang, G. et al. (2016). "Deep Networks with Stochastic Depth." *European Conference on Computer Vision (ECCV)*. https://doi.org/10.1007/978-3-319-46493-0_39
 
-[6] Erman, L.D., Hayes-Roth, F., Lesser, V.R. & Reddy, D.R. (1980). "The Hearsay-II Speech Understanding System: Integrating Knowledge to Resolve Uncertainty." *Computing Surveys*, 12(2), 213–253.
+[6] Erman, L.D., Hayes-Roth, F., Lesser, V.R. & Reddy, D.R. (1980). "The Hearsay-II Speech Understanding System: Integrating Knowledge to Resolve Uncertainty." *Computing Surveys*, 12(2), 213–253. https://doi.org/10.1145/356810.356816
 
-[7] Minsky, M. (1986). *The Society of Mind*. Simon & Schuster.
+[7] Minsky, M. (1986). *The Society of Mind*. Simon & Schuster. https://www.simonandschuster.com/books/Society-Of-Mind/Marvin-Minsky/9780671657130
 
-[8] Jacobs, R.A., Jordan, M.I., Nowlan, S.J. & Hinton, G.E. (1991). "Adaptive Mixtures of Local Experts." *Neural Computation*, 3(1), 79–87.
+[8] Jacobs, R.A., Jordan, M.I., Nowlan, S.J. & Hinton, G.E. (1991). "Adaptive Mixtures of Local Experts." *Neural Computation*, 3(1), 79–87. https://doi.org/10.1162/neco.1991.3.1.79
 
-[9] Collins, A.M. & Loftus, E.F. (1975). "A Spreading-Activation Theory of Semantic Processing." *Psychological Review*, 82(6), 407–428.
+[9] Collins, A.M. & Loftus, E.F. (1975). "A Spreading-Activation Theory of Semantic Processing." *Psychological Review*, 82(6), 407–428. https://doi.org/10.1037/0033-295X.82.6.407
 
-[10] LeCun, Y., Denker, J.S. & Solla, S.A. (1989). "Optimal Brain Damage." *Advances in Neural Information Processing Systems 2 (NeurIPS)*.
+[10] LeCun, Y., Denker, J.S. & Solla, S.A. (1989). "Optimal Brain Damage." *Advances in Neural Information Processing Systems 2 (NeurIPS)*. https://proceedings.neurips.cc/paper/1989/hash/6c9882bbac1c7093bd25041881277658-Abstract.html
 
-[11] Ferrucci, D. et al. (2010). "Building Watson: An Overview of the DeepQA Project." *AI Magazine*, 31(3), 59–79.
+[11] Ferrucci, D. et al. (2010). "Building Watson: An Overview of the DeepQA Project." *AI Magazine*, 31(3), 59–79. https://doi.org/10.1609/aimag.v31i3.2303
 
