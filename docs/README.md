@@ -488,7 +488,7 @@ The system was generated from a single prompt using Google's Antigravity IDE age
 
 [3] He, K., Zhang, X., Ren, S. & Sun, J. (2015). "Deep Residual Learning for Image Recognition." *arXiv:1512.03385*. https://doi.org/10.1109/CVPR.2016.90
 
-[4] Srivastava, N. et al. (2014). "Dropout: A Simple Way to Prevent Neural Networks from Overfitting." *Journal of Machine Learning Research*, 15, 1929–1958. https://doi.org/10.5555/2627435.2670313
+[4] Srivastava, N. et al. (2014). "Dropout: A Simple Way to Prevent Neural Networks from Overfitting." *Journal of Machine Learning Research*, 15, 1929–1958. https://jmlr.org/papers/v15/srivastava14a.html
 
 [5] Huang, G. et al. (2016). "Deep Networks with Stochastic Depth." *European Conference on Computer Vision (ECCV)*. https://doi.org/10.1007/978-3-319-46493-0_39
 
