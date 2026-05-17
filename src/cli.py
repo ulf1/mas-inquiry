@@ -32,8 +32,18 @@ def main():
         "inquiry": args.query,
     }
 
-    # Config for thread management if we were using a checkpointer
-    config = {"configurable": {"thread_id": "cli_user"}}
+    # Config with enhanced LangSmith metadata and custom run name
+    config = {
+        "configurable": {
+            "thread_id": "cli_user"
+        },
+        "run_name": "InquiryDecompositionGraph",
+        "metadata": {
+            "environment": "development",
+            "interface": "CLI",
+            "dimensions_count": 22
+        }
+    }
 
     try:
         # Use stream to get updates as the graph executes

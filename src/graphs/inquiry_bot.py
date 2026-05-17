@@ -10,6 +10,7 @@ from langgraph.checkpoint.memory import InMemorySaver
 # llm client
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_core.runnables import RunnableConfig
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -76,7 +77,7 @@ def init_node(state: AgentState):
 
 HUMAN_PROMPT = "Please process the inquiry and provide the structured list as requested."
 
-def prelim_nodes(state: AgentState):
+def prelim_nodes(state: AgentState, config: RunnableConfig):
     # loop over state.active_workers (ALL_DIMENSIONS) to create batch of inline requests
     results = {}
     
@@ -87,7 +88,7 @@ def prelim_nodes(state: AgentState):
         response = structured_llm.invoke([
             SystemMessage(content=system_content),
             HumanMessage(content=HUMAN_PROMPT)
-        ]) # invoke llm
+        ], config=config) # invoke llm
         return name, response
 
     with ThreadPoolExecutor() as executor:
@@ -102,7 +103,7 @@ def prelim_nodes(state: AgentState):
 
 MERGER_PROMPT = "Please process the previous texts and merge the overlapping contents efficiently."
 
-def cross_nodes(state: AgentState):
+def cross_nodes(state: AgentState, config: RunnableConfig):
     # use the answers
     new_inputs = {}
     for from_dim, reply in state["worker_replies"].items():
@@ -132,7 +133,7 @@ def cross_nodes(state: AgentState):
         response = structured_llm.invoke([
             SystemMessage(content=system_content),
             HumanMessage(content=HUMAN_PROMPT)
-        ])
+        ], config=config)
         return to_dim, response
 
     with ThreadPoolExecutor() as executor:
@@ -154,7 +155,7 @@ def cross_nodes(state: AgentState):
         merger_llm = llm.with_structured_output(InquiryReplyMerger.output_schema)
         merged_reply = merger_llm.invoke([
             SystemMessage(content=merger_content),
-            HumanMessage(content=MERGER_PROMPT)])
+            HumanMessage(content=MERGER_PROMPT)], config=config)
         
         # metric check to save or deactivate
         prev_metric = calculate_worker_metric(previous[dim])
