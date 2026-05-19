@@ -2,7 +2,7 @@
 
 ## Readings
 
-1. **The initial prompt**: [The initial prompt](docs/01-prompt-original.md)
+1. **The initial prompt**: [The initial prompt](docs/01-the-initial-prompt.md)
 2. **Documentation**: ["A Multi-Agent System for Interrogative Decomposition of Human Inquiries Using LLM-Backed Sparse Dynamic Graphs"](docs/README.md)
 3. **Literature review**: [Literature review and research on related work](docs/02-literature-search.md)
 
